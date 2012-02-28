@@ -12,7 +12,7 @@ def main():
     roboArray = makeRobots(size,numRobots)
     for robot in roboArray:
         print robot
-      
+ 
 def makeRobots(size, numRobots):
     height, width = size
     arr = []
@@ -38,14 +38,6 @@ def getNeighborList(size,point):
         neighbors.remove(w if col == 0 else e)
     return neighbors
 
-def wavefront(start, goal):
-    #Get Neighbors of Goal
-    #while not at start
-        #Assign values to each of the neighbors
-        #Get neighbors of neighbors
-        #Remove current neighbors from list
-        #value ++
-    pass
 
 #Create the robot objects
 class Robot:
