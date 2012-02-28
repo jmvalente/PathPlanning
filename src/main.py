@@ -50,7 +50,6 @@ class Robot:
         self.start = start
         self.goal = goal
         self.color = self.genColor()
-        self.matrix = self.initGrid(self.size, self.start, self.goal)
         self.ID = 'R_' + str(Robot.population)
         Robot.population +=1
         
@@ -66,7 +65,7 @@ class Robot:
     
     def initGrid(self, size, start, goal):
         #Create Grid first
-        height, width = (size)
+        height, width = size
         sr, sc = start
         gr, gc = goal
         grid = [[0] * width for i in range(height)]
@@ -105,8 +104,10 @@ class Grid():
         self.cols = self.size[1]
         self.robots = robotList
         self.obstacles = obstacleList
-        self.map = [[{}] * self.cols for i in range(self.rows)] #Each node holds a dictionary of robot values
+        #self.map = [[{}] * self.cols for i in range(self.rows)] #Each node holds a dictionary of robot values
+        self.map = self.initGrid()
         self.populateGrid()
+
     
     def populateGrid(self):
         for robot in self.robots:
@@ -114,9 +115,16 @@ class Grid():
             sRow, sCol = robot.start
             self.map[gRow][gCol][robot.ID] = 'G'
             self.map[sRow][sCol][robot.ID] = 'S'
-            
+
     def checkPoint(self, row, col):    
         return self.map[row][col] #Find the value of a node after wavefront is run.
+    
+    def initGrid(self):
+        grid = [[''] * self.cols for i in range(self.rows)]
+        for row in range(self.rows):
+            for col in range(self.cols):
+                grid[row][col] = {}
+        return grid
         
 if __name__ == '__main__':
     main()    
