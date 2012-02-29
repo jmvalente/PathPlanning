@@ -9,12 +9,12 @@ def main():
     size = (50,50) #(Rows, Columns)
     obstacles = []
     Robot.size = size
-    print "Finding paths for {0} robots on a {1[0]!s}x{1[1]!s} grid.\n".format(numRobots, size)
     roboArray = makeRobots(size,numRobots)
+    world = Grid(size, roboArray, obstacles) 
+    print world
     for robot in roboArray:
         print robot
-    world = Grid(size, roboArray, obstacles) 
-    print world.map
+        
 def makeRobots(size, numRobots):
     height, width = size
     arr = []
@@ -44,7 +44,10 @@ def getNeighborList(size,point):
 #Create the robot objects
 class Robot:
     
-    population = 0 #Keep track of how many robots exist, useful for assigning ID. 
+    population = 0 #Keep track of how many robots exist, useful for assigning ID.
+    #We should keep a list of occupied start and end nodes so we don't give two robots the same point
+    startList = []
+    goalList = []
     
     def __init__(self, start, goal):
         self.start = start
@@ -63,16 +66,6 @@ class Robot:
         x = randint(0, 16777215)
         return hex(x)
     
-    def initGrid(self, size, start, goal):
-        #Create Grid first
-        height, width = size
-        sr, sc = start
-        gr, gc = goal
-        grid = [[0] * width for i in range(height)]
-        grid[sr][sc] = "S"
-        grid[gr][gc] = "G"
-        return grid
-    
     def wavefront(self, start, goal):
         #Get Neighbors of Goal
         val = 1
@@ -83,17 +76,7 @@ class Robot:
             #Remove current neighbors from list
             #value ++
         pass
-    
-    def gridText(self):
-        height = self.size[0]
-        width = self.size[1]
-        grid = self.matrix
-        gs = ''
-        for row in range(height):
-            for col in range(width):
-                gs+= str(grid[row][col])
-            gs+="\n"
-        return gs
+
     
 #Create the grid used by all the robots
 class Grid():
@@ -104,27 +87,39 @@ class Grid():
         self.cols = self.size[1]
         self.robots = robotList
         self.obstacles = obstacleList
-        #self.map = [[{}] * self.cols for i in range(self.rows)] #Each node holds a dictionary of robot values
-        self.map = self.initGrid()
+        self.map = [[{} for col in range(self.cols)] for row in range(self.rows)]
         self.populateGrid()
-
     
+    def __str__(self):
+        return "The world is a {0[0]!s}x{0[1]!s} grid home to {1!s} robots with {2!s} obstacles\n"\
+            .format(self.size, len(self.robots), len(self.obstacles))
+
     def populateGrid(self):
+        #Pre-wavefront grid with start and goals marked
         for robot in self.robots:
             gRow, gCol = robot.goal
             sRow, sCol = robot.start
+            for row in range(self.rows):
+                for col in range(self.cols):
+                    self.map[row][col][robot.ID] = 0
             self.map[gRow][gCol][robot.ID] = 'G'
             self.map[sRow][sCol][robot.ID] = 'S'
+            #Block off obstacles 
+            for obstacle in self.obstacles:
+                oRow, oCol = obstacle
+                self.map[oRow][oCol] = 'X'
 
     def checkPoint(self, row, col):    
         return self.map[row][col] #Find the value of a node after wavefront is run.
     
-    def initGrid(self):
-        grid = [[''] * self.cols for i in range(self.rows)]
+    def printGrid(self, robot):
+        robotID = robot.ID
+        gs = ''
         for row in range(self.rows):
             for col in range(self.cols):
-                grid[row][col] = {}
-        return grid
-        
+                gs+= str(self.map[row][col][robotID])
+            gs+='\n'
+        return gs
+    
 if __name__ == '__main__':
     main()    
