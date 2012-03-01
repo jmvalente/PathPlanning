@@ -5,8 +5,8 @@
 from random import randint
 
 def main():
-    numRobots = 10
-    size = (50,50) #(Rows, Columns)
+    numRobots = 1
+    size = (3,3) #(Rows, Columns)
     obstacles = []
     Robot.size = size
     roboArray = makeRobots(size,numRobots)
@@ -14,6 +14,7 @@ def main():
     print world
     for robot in roboArray:
         print robot
+        print world.printGrid(robot)
         
 def makeRobots(size, numRobots):
     height, width = size
@@ -24,21 +25,6 @@ def makeRobots(size, numRobots):
         arr.append(Robot(start,goal))
     return  arr
 
-def getNeighborList(size,point):
-    row,col = point
-    maxX = size[1] - 1
-    maxY = size[0] - 1
-    w = (row,col - 1)
-    e = (row, col + 1)
-    n = (row - 1, col)
-    s = (row + 1, col)
-    neighbors = [n,w,e,s]
-    #Less neighbors if we are checking a node at a north/south edge, a east/west edge
-    if row == 0 or row == maxY:
-        neighbors.remove(n if row == 0 else s) 
-    if col == 0 or col == maxX:
-        neighbors.remove(w if col == 0 else e)
-    return neighbors
 
 
 #Create the robot objects
@@ -54,6 +40,7 @@ class Robot:
         self.goal = goal
         self.color = self.genColor()
         self.ID = 'R_' + str(Robot.population)
+        self.paths = []
         Robot.population +=1
         
     def __str__(self):
@@ -61,21 +48,13 @@ class Robot:
         return "ID : {id!s}\nStart: {st!s}\nGoal: {gl!s}\nColor: {cl!s}\n" \
                 .format(id=self.ID, st=self.start, gl=self.goal, cl=self.color)
                 
+    def findPaths(self):
+        pass
+            
     @staticmethod
     def genColor():
         x = randint(0, 16777215)
         return hex(x)
-    
-    def wavefront(self, start, goal):
-        #Get Neighbors of Goal
-        val = 1
-        nodesToCheck = getNeighborList(self.size,goal)
-        #while not at start
-            #Assign values to each of the neighbors
-            #Get neighbors of neighbors
-            #Remove current neighbors from list
-            #value ++
-        pass
 
     
 #Create the grid used by all the robots
@@ -89,6 +68,7 @@ class Grid():
         self.obstacles = obstacleList
         self.map = [[{} for col in range(self.cols)] for row in range(self.rows)]
         self.populateGrid()
+        self.wavefront()
     
     def __str__(self):
         return "The world is a {0[0]!s}x{0[1]!s} grid home to {1!s} robots with {2!s} obstacles\n"\
@@ -120,6 +100,59 @@ class Grid():
                 gs+= str(self.map[row][col][robotID])
             gs+='\n'
         return gs
+    
+    def getNeighborList(self, point):
+        row,col = point
+        maxX = self.size[1] - 1
+        maxY = self.size[0] - 1
+        w = (row,col - 1)
+        e = (row, col + 1)
+        n = (row - 1, col)
+        s = (row + 1, col)
+        neighbors = set([n,w,e,s])
+        #Less neighbors if we are checking a node at a north/south edge, a east/west edge
+        if row == 0 or row == maxY:
+            neighbors.remove(n if row == 0 else s) 
+        if col == 0 or col == maxX:
+            neighbors.remove(w if col == 0 else e)
+        return neighbors
+    
+    def wavefront(self):
+        for robot in self.robots:
+            #Get Neighbors of Goal
+            val = 1
+            currPos = robot.goal
+            print "Starting at: {0!s}\n".format(currPos)
+            nodesToCheck = self.getNeighborList(currPos)
+            print "Need to check:{0!s}\n".format(nodesToCheck)
+            tempNeighbor = set()
+            visited = set()
+            #while not at start
+            while currPos != robot.start:
+                #Assign values to each of the neighbors
+                for node in nodesToCheck:
+                    #Mark each node's value
+                    self.markNode(currPos, node, robot, val)
+                    #Get neighbors of neighbor
+                    tempNeighbor.union(self.getNeighborList(node))
+                    #Remove the current point from the list as all of its neighbors.
+                    visited.add(node)
+                    currPos = node
+                #Remove current neighbors from list
+                nodesToCheck = set(tempNeighbor)
+                tempNeighbor = set()
+                
+                #value ++
+                val +=1
+            pass
+        
+    def markNode(self, currPos, node, robot, value):
+        currRow, currCol = currPos
+        nodeRow, nodeCol = node
+        robotID = robot.ID
+        if self.map[nodeRow][nodeCol][robotID] < self.map[currRow][currCol][robotID]:
+            self.map[nodeRow][nodeCol][robotID] = value
+        pass
     
 if __name__ == '__main__':
     main()    
