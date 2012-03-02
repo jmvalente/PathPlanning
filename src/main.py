@@ -5,10 +5,10 @@
 from random import randint
 
 def main():
-    numRobots = 1
-    size = (3,3) #(Rows, Columns)
-    obstacles = []
-    Robot.size = size
+    numRobots = 10
+    size = (9,9) #(Rows, Columns)
+    obstacles = set()
+    Grid.size = size
     roboArray = makeRobots(size,numRobots)
     world = Grid(size, roboArray, obstacles) 
     print world
@@ -17,11 +17,10 @@ def main():
         print world.printGrid(robot)
         
 def makeRobots(size, numRobots):
-    height, width = size
+    
     arr = []
     for i in range(numRobots):
-        start = (randint(1,height)-1, randint(1,width)-1) #Subtracting 1 because arrays are indexed 0...n-1. 
-        goal = (randint(1,height)-1, randint(1,width)-1)
+        start, goal = Robot.genWaypoints()
         arr.append(Robot(start,goal))
     return  arr
 
@@ -32,8 +31,8 @@ class Robot:
     
     population = 0 #Keep track of how many robots exist, useful for assigning ID.
     #We should keep a list of occupied start and end nodes so we don't give two robots the same point
-    startList = []
-    goalList = []
+    startNodes = ()
+    goalNodes = ()
     
     def __init__(self, start, goal):
         self.start = start
@@ -55,12 +54,18 @@ class Robot:
     def genColor():
         x = randint(0, 16777215)
         return hex(x)
-
+    @staticmethod
+    def genWaypoints():
+        height, width = Grid.size
+        start = (randint(1,height)-1, randint(1,width)-1)
+        goal = (randint(1,height)-1, randint(1,width)-1)
+        return start,goal
+    
     
 #Create the grid used by all the robots
 class Grid():
     
-    def __init__(self,size, robotList, obstacleList):
+    def __init__(self, size, robotList, obstacleList):
         self.size = size
         self.rows = self.size[0]
         self.cols = self.size[1]
@@ -110,7 +115,7 @@ class Grid():
         n = (row - 1, col)
         s = (row + 1, col)
         neighbors = set([n,w,e,s])
-        #Less neighbors if we are checking a node at a north/south edge, a east/west edge
+        #Remove neighbors if we are checking a node at a north/south edge, a east/west edge
         if row == 0 or row == maxY:
             neighbors.remove(n if row == 0 else s) 
         if col == 0 or col == maxX:
@@ -119,40 +124,28 @@ class Grid():
     
     def wavefront(self):
         for robot in self.robots:
-            #Get Neighbors of Goal
-            val = 1
-            currPos = robot.goal
-            print "Starting at: {0!s}\n".format(currPos)
-            nodesToCheck = self.getNeighborList(currPos)
-            print "Need to check:{0!s}\n".format(nodesToCheck)
+            #In our implementation we start at the goal node and work back to start
+            nodesToCheck = self.getNeighborList(robot.goal) 
+            self.markNode(robot.goal, robot, 1)
+            val = 2
             tempNeighbor = set()
-            visited = set()
-            #while not at start
-            while currPos != robot.start:
-                #Assign values to each of the neighbors
+            visited= set([robot.goal])
+            
+            while not set([robot.start]).issubset(nodesToCheck):
                 for node in nodesToCheck:
-                    #Mark each node's value
-                    self.markNode(currPos, node, robot, val)
-                    #Get neighbors of neighbor
-                    tempNeighbor.union(self.getNeighborList(node))
-                    #Remove the current point from the list as all of its neighbors.
+                    self.markNode(node, robot, val)
+                    tempNeighbor = tempNeighbor.union(self.getNeighborList(node)) 
                     visited.add(node)
-                    currPos = node
-                #Remove current neighbors from list
+                    
                 nodesToCheck = set(tempNeighbor)
-                tempNeighbor = set()
-                
-                #value ++
+                nodesToCheck.difference_update(visited) #Remove any visited nodes from the list to check
+                tempNeighbor = set() #Remove all elements from the running list for the next iteration
                 val +=1
-            pass
         
-    def markNode(self, currPos, node, robot, value):
-        currRow, currCol = currPos
+    def markNode(self, node, robot, value):
         nodeRow, nodeCol = node
         robotID = robot.ID
-        if self.map[nodeRow][nodeCol][robotID] < self.map[currRow][currCol][robotID]:
-            self.map[nodeRow][nodeCol][robotID] = value
-        pass
+        self.map[nodeRow][nodeCol][robotID] = value
     
 if __name__ == '__main__':
     main()    
