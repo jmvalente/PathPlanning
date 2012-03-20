@@ -9,8 +9,8 @@ from entities.robot import Robot
 def main():
     
     numRobots = 10
-    size = (5,5) #(Rows, Columns)
-    obstacles = set()
+    size = (10,10) #(Rows, Columns)
+    obstacles = set([])
     Grid.size = size
     roboArray = makeRobots(size,numRobots)
     world = Grid(size, roboArray, obstacles) 

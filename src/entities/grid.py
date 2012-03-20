@@ -23,12 +23,13 @@ class Grid():
             for row in range(self.rows):
                 for col in range(self.cols):
                     self.map[row][col][robot.ID] = 0
-            self.map[gRow][gCol][robot.ID] = 'G'
-            self.map[sRow][sCol][robot.ID] = 'S'
             #Block off obstacles 
             for obstacle in self.obstacles:
                 oRow, oCol = obstacle
-                self.map[oRow][oCol] = 'X'
+                self.map[oRow][oCol][robot.ID] = 'X'
+            self.map[gRow][gCol][robot.ID] = 'G'
+            self.map[sRow][sCol][robot.ID] = 'S'
+
 
     def checkPoint(self, row, col):    
         return self.map[row][col] #Find the value of a node after wavefront is run.
@@ -42,7 +43,7 @@ class Grid():
             gs+='\n'
         return gs
     
-    def getNeighborList(self, point):
+    def getNeighborList(self, point, robot):
         row,col = point
         maxX = self.size[1] - 1
         maxY = self.size[0] - 1
@@ -59,14 +60,14 @@ class Grid():
         #If a neighbor is an obstacle then it really isn't a good neighbor, is it?
         for neighbor in set(neighbors):
             nRow, nCol = neighbor
-            if self.map[nRow][nCol] == 'X':
+            if self.map[nRow][nCol][robot.ID] == 'X':
                 neighbors.remove(neighbor)
         return neighbors
     
     def wavefront(self):
         for robot in self.robots:
             #In our implementation we start at the goal node and work back to start
-            nodesToCheck = self.getNeighborList(robot.goal) 
+            nodesToCheck = self.getNeighborList(robot.goal, robot) 
             self.markNode(robot.goal, robot, 1)
             val = 2
             tempNeighbor = set()
@@ -75,7 +76,7 @@ class Grid():
             while not set([robot.start]).issubset(nodesToCheck):
                 for node in nodesToCheck:
                     self.markNode(node, robot, val)
-                    tempNeighbor = tempNeighbor.union(self.getNeighborList(node)) 
+                    tempNeighbor = tempNeighbor.union(self.getNeighborList(node,robot)) 
                     visited.add(node)
                     
                 nodesToCheck = set(tempNeighbor)
