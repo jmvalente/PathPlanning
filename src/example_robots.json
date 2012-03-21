@@ -1,0 +1,24 @@
+{
+	"Size": {
+		"Rows" : 50,
+		"Cols" : 50
+		},
+	"Robots": {
+		"R_0": {
+			"start": "(1,1)",
+			"goal": "(10,0)",
+			"path" : "EEEEEEEEE",
+			"color": "0xF0F0F0"
+			},
+		"R_1": {
+			"start": "(5,10)",
+			"goal": "(10,15)",
+			"path" : "NNNNNEEEEE",
+			"color": "0xFFFFFF"
+			}
+		},
+		"Obstacles" : [
+			"(0,1)",
+			"(0,0)"
+			]
+	}
