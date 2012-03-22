@@ -14,7 +14,7 @@ class Robot:
         self.color = self.genColor()
         self.ID = 'R_' + str(Robot.population)
         self.paths = []
-        Robot.population +=1
+        Robot.population += 1
         
     def __str__(self):
         #Tell me about your mother.
@@ -32,8 +32,8 @@ class Robot:
     @staticmethod
     def genWaypoints():
         height, width = Grid.size
-        start = (randint(1,height)-1, randint(1,width)-1)
-        goal = (randint(1,height)-1, randint(1,width)-1)
-        return start,goal
+        start = (randint(1, height) - 1, randint(1, width) - 1)
+        goal = (randint(1, height) - 1, randint(1, width) - 1)
+        return start, goal
     
     

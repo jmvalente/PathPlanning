@@ -9,10 +9,10 @@ from entities.robot import Robot
 def main():
     
     numRobots = 10
-    size = (10,10) #(Rows, Columns)
-    obstacles = set([])
+    size = (10, 10) #(Rows, Columns)
+    obstacles = set()
     Grid.size = size
-    roboArray = makeRobots(size,numRobots)
+    roboArray = makeRobots(size, numRobots)
     world = Grid(size, roboArray, obstacles) 
     print world
     for robot in roboArray:
@@ -24,7 +24,7 @@ def makeRobots(size, numRobots):
     arr = []
     for i in range(numRobots):
         start, goal = Robot.genWaypoints()
-        arr.append(Robot(start,goal))
+        arr.append(Robot(start, goal))
     return  arr
 
     

@@ -39,19 +39,19 @@ class Grid():
         gs = ''
         for row in range(self.rows):
             for col in range(self.cols):   
-                gs+= str(self.map[row][col][robotID])
-            gs+='\n'
+                gs += str(self.map[row][col][robotID])
+            gs += '\n'
         return gs
     
     def getNeighborList(self, point, robot):
-        row,col = point
+        row, col = point
         maxX = self.size[1] - 1
         maxY = self.size[0] - 1
-        w = (row,col - 1)
+        w = (row, col - 1)
         e = (row, col + 1)
         n = (row - 1, col)
         s = (row + 1, col)
-        neighbors = set([n,w,e,s])
+        neighbors = set([n, w, e, s])
         #Remove neighbors if we are checking a node at a north/south edge, a east/west edge
         if row == 0 or row == maxY:
             neighbors.remove(n if row == 0 else s) 
@@ -71,18 +71,18 @@ class Grid():
             self.markNode(robot.goal, robot, 1)
             val = 2
             tempNeighbor = set()
-            visited= set([robot.goal])
+            visited = set([robot.goal])
             
             while not set([robot.start]).issubset(nodesToCheck):
                 for node in nodesToCheck:
                     self.markNode(node, robot, val)
-                    tempNeighbor = tempNeighbor.union(self.getNeighborList(node,robot)) 
+                    tempNeighbor = tempNeighbor.union(self.getNeighborList(node, robot)) 
                     visited.add(node)
                     
                 nodesToCheck = set(tempNeighbor)
                 nodesToCheck.difference_update(visited) #Remove any visited nodes from the list to check
                 tempNeighbor = set() #Remove all elements from the running list for the next iteration
-                val +=1
+                val += 1
         
     def markNode(self, node, robot, value):
         nodeRow, nodeCol = node
