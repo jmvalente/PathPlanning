@@ -31,8 +31,8 @@ class Grid():
             self.map[sRow][sCol][robot.ID] = 'S'
 
 
-    def checkPoint(self, row, col):    
-        return self.map[row][col] #Find the value of a node after wavefront is run.
+    def checkPoint(self, row, col, robotID):    
+        return self.map[row][col][robotID] #Find the value of a node after wavefront is run.
     
     def printGrid(self, robot):
         robotID = robot.ID
@@ -43,7 +43,7 @@ class Grid():
             gs += '\n'
         return gs
     
-    def getNeighborList(self, point, robot):
+    def getNeighborList(self, point, robot, checkVal=0):
         row, col = point
         maxX = self.size[1] - 1
         maxY = self.size[0] - 1
@@ -62,6 +62,15 @@ class Grid():
             nRow, nCol = neighbor
             if self.map[nRow][nCol][robot.ID] == 'X':
                 neighbors.remove(neighbor)
+        if checkVal == 1:
+            cur = self.checkPoint(row, col, robot.ID)
+            for neighbor in set(neighbors):
+                nRow, nCol = neighbor
+                nVal = self.checkPoint(nRow, nCol, robot.ID)
+                if nVal > cur:
+                    neighbors.remove(neighbor)
+                elif nVal == 0:
+                    neighbors.remove(neighbor)
         return neighbors
     
     def wavefront(self):
@@ -88,3 +97,12 @@ class Grid():
         nodeRow, nodeCol = node
         robotID = robot.ID
         self.map[nodeRow][nodeCol][robotID] = value
+    
+    def buildGraph(self, robot):
+        
+        graph = {}
+        for row in range(len(self.map)):
+            for col in range(len(self.map[0])):
+                node = (row, col)
+                graph[str(node)] = self.getNeighborList(node, robot, 1)
+        return graph
