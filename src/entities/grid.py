@@ -104,5 +104,5 @@ class Grid():
         for row in range(len(self.map)):
             for col in range(len(self.map[0])):
                 node = (row, col)
-                graph[str(node)] = self.getNeighborList(node, robot, 1)
+                graph[str(node)] = list(self.getNeighborList(node, robot, 1))
         return graph

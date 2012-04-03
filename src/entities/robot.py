@@ -21,8 +21,19 @@ class Robot:
         return "ID : {id!s}\nStart: {st!s}\nGoal: {gl!s}\nColor: {cl!s}\n" \
                 .format(id=self.ID, st=self.start, gl=self.goal, cl=self.color)
                 
-    def findPaths(self):
-        pass
+    def findPaths(self, graph, start, goal, path = []):
+        path = path + [start]
+        if start == goal:
+            return [path]
+        if not graph.has_key(str(start)):
+            return []
+        paths = []
+        for node in graph[str(start)]:
+            if node not in path:
+                newpaths = self.findPaths(graph, node, goal, path)
+                for newpath in newpaths:
+                    paths.append(newpath)
+        return paths
             
     @staticmethod
     def genColor():

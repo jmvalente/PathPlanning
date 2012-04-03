@@ -18,6 +18,7 @@ def main():
     for robot in roboArray:
         print robot
         print world.printGrid(robot)
+    
         
 def makeRobots(size, numRobots):
     
