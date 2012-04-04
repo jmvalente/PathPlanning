@@ -14,6 +14,7 @@ class Robot:
         self.color = self.genColor()
         self.ID = 'R_' + str(Robot.population)
         self.paths = []
+        self.bestPath = ''
         Robot.population += 1
         
     def __str__(self):
@@ -21,7 +22,7 @@ class Robot:
         return "ID : {id!s}\nStart: {st!s}\nGoal: {gl!s}\nColor: {cl!s}\n" \
                 .format(id=self.ID, st=self.start, gl=self.goal, cl=self.color)
                 
-    def findPaths(self, graph, start, goal, path = []):
+    def findPaths(self, graph, start, goal, path=[]):
         path = path + [start]
         paths = []        
         if start == goal:
@@ -50,4 +51,20 @@ class Robot:
         goal = (randint(1, height) - 1, randint(1, width) - 1)
         return start, goal
     
+    def pathToDirection(self, path):
+        directions = ''
+        for step in range(len(path) - 1):
+            if path[step][0] > path[step + 1][0]:
+                directions += "N"
+            elif path[step][0] < path[step + 1][0]:
+                directions += "S"
+            elif path[step][0] == path[step + 1][0]:
+                if path[step][1] > path[step + 1][1]:
+                    directions += "W"
+                elif path[step][1] < path[step + 1][1]:
+                    directions += "E"
+                elif path[step][1] == path[step + 1][1]:
+                    directions = "H"
+        return directions
+                
     

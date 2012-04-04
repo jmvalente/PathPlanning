@@ -22,9 +22,9 @@ def main():
         print world.printGrid(robot)
         for path in robot.paths:
             print path
+            print robot.pathToDirection(path)
         
-    
-        
+          
 def makeRobots(size, numRobots):
     
     arr = []
