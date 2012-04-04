@@ -23,16 +23,19 @@ class Robot:
                 
     def findPaths(self, graph, start, goal, path = []):
         path = path + [start]
+        paths = []        
         if start == goal:
             return [path]
         if not graph.has_key(str(start)):
             return []
-        paths = []
+
         for node in graph[str(start)]:
             if node not in path:
                 newpaths = self.findPaths(graph, node, goal, path)
                 for newpath in newpaths:
                     paths.append(newpath)
+                    if len(paths) > 10:
+                        return paths
         return paths
             
     @staticmethod

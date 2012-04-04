@@ -16,8 +16,13 @@ def main():
     world = Grid(size, roboArray, obstacles) 
     print world
     for robot in roboArray:
+        robot.graph = world.buildGraph(robot)
+        robot.paths = robot.findPaths(robot.graph, robot.start, robot.goal)
         print robot
         print world.printGrid(robot)
+        for path in robot.paths:
+            print path
+        
     
         
 def makeRobots(size, numRobots):
