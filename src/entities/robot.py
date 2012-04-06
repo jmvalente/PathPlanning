@@ -64,7 +64,7 @@ class Robot:
                 elif path[step][1] < path[step + 1][1]:
                     directions += "E"
                 elif path[step][1] == path[step + 1][1]:
-                    directions = "H"
+                    directions += "H"
         return directions
                 
     

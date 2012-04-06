@@ -1,17 +1,19 @@
 import tocartesian
 def expJSON(robotList, obstacleList, size, writeFile=True):
     import json
-    rJSON = ''
-    oJSON = ''
+    rJSON = "Robots: "
+    oJSON = "Obstacles: "
     #Create JSON for size
-    sJSON = ''
+    sJSON = "Size: " + str(dict([("Rows", size[0]), ("Cols", size[1])]))
     for robot in robotList:
         cStart = str(tocartesian.convertPoint(robot.start, size))
         cGoal = str(tocartesian.convertPoint(robot.goal, size))
         #Create JSON for Robot, write to rJSON
+    cObsticles = []
     for obstacle in obstacleList:
         cObst = str(tocartesian.convertPoint(obstacle, size))
-        #Create JSON for Osbtacles
+        cObsticles.append(cObst)
+    oJSON += str(cObsticles)
     #Combine JSON for size, robot list, and obstacle list
     output = ''
     if writeFile:
