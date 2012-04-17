@@ -66,5 +66,21 @@ class Robot:
                 elif path[step][1] == path[step + 1][1]:
                     directions += "H"
         return directions
+    
+    @staticmethod
+    def getCollisionPoint(pathA, pathB):
+        if len(pathA) > len(pathB):
+            for iNode in range(len(pathB)):
+                if pathA[iNode] == pathB[iNode]:
+                    return iNode
+        else:
+            for iNode in range(len(pathA)):
+                if pathA[iNode] == pathB[iNode]:
+                    return iNode
+        return False #If there are no collisions, return False to let us know things are OK.
+    
+    @staticmethod
+    def getBestPath(robotList):
+        pass
                 
     
