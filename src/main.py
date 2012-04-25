@@ -9,7 +9,7 @@ from entities.robot import Robot
 def main():
     
     numRobots = 10
-    size = (50, 50) #(Rows, Columns)
+    size = (15, 15) #(Rows, Columns)
     obstacles = set()
     Grid.size = size
     roboArray = makeRobots(size, numRobots)
@@ -19,11 +19,11 @@ def main():
         robot.graph = world.buildGraph(robot)
         robot.paths = robot.findPaths(robot.graph, robot.start, robot.goal)
         print robot
-        #print world.printGrid(robot)
-        for path in robot.paths:
-            print path
-            print robot.pathToDirection(path)
-        
+#        print world.printGrid(robot)
+#        for path in robot.paths:
+#            print path
+#            print robot.pathToDirection(path)
+    Robot.getBestPath(roboArray)
           
 def makeRobots(size, numRobots):
     

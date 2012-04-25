@@ -14,7 +14,7 @@ class Robot:
         self.color = self.genColor()
         self.ID = 'R_' + str(Robot.population)
         self.paths = []
-        self.bestPath = ''
+        self.bestPath = []
         Robot.population += 1
         
     def __str__(self):
@@ -35,7 +35,7 @@ class Robot:
                 newpaths = self.findPaths(graph, node, goal, path)
                 for newpath in newpaths:
                     paths.append(newpath)
-                    if len(paths) > 10:
+                    if len(paths) > 9:
                         return paths
         return paths
             
@@ -81,6 +81,49 @@ class Robot:
     
     @staticmethod
     def getBestPath(robotList):
-        pass
-                
-    
+        robotPathPairs = set([(0, 0)]) #Initialize the set of pairs with Robot 0, Path 0
+        robotIndex = 1
+        pathIndex = 0 
+        while robotIndex < len(robotList):
+            badPath = False
+            while True:
+                for pair in robotPathPairs:
+                    try:
+                        collisionPoint = Robot.getCollisionPoint(robotList[pair[0]].paths[pair[1]], 
+                                                                 robotList[robotIndex].paths[pathIndex])
+                    except IndexError:
+                        print "Resetting path index"
+                        pathIndex = 0
+                        badPath = False
+                        break
+                    else:
+                        if collisionPoint:
+                            print Robot.collisionDetails(pair, (robotIndex, pathIndex), collisionPoint)
+                            robotList[robotIndex].paths[pathIndex].insert(collisionPoint, robotList[robotIndex].paths[pathIndex][collisionPoint - 1])
+                            #Robot.addWait(robotList[robotIndex], pathIndex, collisionPoint)
+                            pathIndex += 1 
+                            badPath = True
+                            break
+                if not badPath:
+                    print "No collision, adding Robot {0}, Path {1} to set".format(robotIndex, pathIndex)
+                    robotPathPairs.add((robotIndex, pathIndex))
+                    pathIndex = 0
+                    robotIndex += 1
+                    badPath = False
+                    break
+            
+        #Now to update each robot with the best path
+        for pair in robotPathPairs:
+                r, p = pair
+                robotList[r].bestPath = robotList[r].paths[p]
+        print "Done"
+    @staticmethod
+    def collisionDetails(pathA, pathB, point):
+        aR, aP = pathA #First robot, path
+        bR, bP = pathB #Second robot,path
+        message = "***Collision found at step {0} between R_{1}.path[{2}] and R_{3}.path[{4}]. Incrementing path index!***"
+        return message.format(point, aR, aP, bR, bP)
+    @staticmethod
+    def addWait(robot, path, index):
+        value = robot.paths[path][index-1]
+        robot.paths[path].insert(index, value)
