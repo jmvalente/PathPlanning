@@ -14,7 +14,7 @@ class Robot:
         self.color = self.genColor()
         self.ID = 'R_' + str(Robot.population)
         self.paths = []
-        self.bestPath = []
+        self.bestPath = ''
         Robot.population += 1
         
     def __str__(self):
@@ -51,7 +51,8 @@ class Robot:
         goal = (randint(1, height) - 1, randint(1, width) - 1)
         return start, goal
     
-    def pathToDirection(self, path):
+    @staticmethod
+    def pathToDirection(path):
         directions = ''
         for step in range(len(path) - 1):
             if path[step][0] > path[step + 1][0]:
@@ -89,10 +90,10 @@ class Robot:
             while True:
                 for pair in robotPathPairs:
                     try:
-                        collisionPoint = Robot.getCollisionPoint(robotList[pair[0]].paths[pair[1]], 
+                        collisionPoint = Robot.getCollisionPoint(robotList[pair[0]].paths[pair[1]],
                                                                  robotList[robotIndex].paths[pathIndex])
                     except IndexError:
-                        print "Resetting path index"
+#                        print "Resetting path index"
                         pathIndex = 0
                         badPath = False
                         break
@@ -105,7 +106,7 @@ class Robot:
                             badPath = True
                             break
                 if not badPath:
-                    print "No collision, adding Robot {0}, Path {1} to set".format(robotIndex, pathIndex)
+#                    print "No collision, adding Robot {0}, Path {1} to set".format(robotIndex, pathIndex)
                     robotPathPairs.add((robotIndex, pathIndex))
                     pathIndex = 0
                     robotIndex += 1
@@ -115,15 +116,16 @@ class Robot:
         #Now to update each robot with the best path
         for pair in robotPathPairs:
                 r, p = pair
-                robotList[r].bestPath = robotList[r].paths[p]
-        print "Done"
+                robotList[r].bestPath = Robot.pathToDirection(robotList[r].paths[p])
+        
     @staticmethod
     def collisionDetails(pathA, pathB, point):
         aR, aP = pathA #First robot, path
         bR, bP = pathB #Second robot,path
         message = "***Collision found at step {0} between R_{1}.path[{2}] and R_{3}.path[{4}]. Incrementing path index!***"
         return message.format(point, aR, aP, bR, bP)
+    
     @staticmethod
     def addWait(robot, path, index):
-        value = robot.paths[path][index-1]
+        value = robot.paths[path][index - 1]
         robot.paths[path].insert(index, value)

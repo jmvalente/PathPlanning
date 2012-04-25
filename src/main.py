@@ -18,12 +18,11 @@ def main():
     for robot in roboArray:
         robot.graph = world.buildGraph(robot)
         robot.paths = robot.findPaths(robot.graph, robot.start, robot.goal)
-        print robot
 #        print world.printGrid(robot)
-#        for path in robot.paths:
-#            print path
-#            print robot.pathToDirection(path)
     Robot.getBestPath(roboArray)
+    for robot in roboArray:
+        print robot
+        print robot.bestPath
           
 def makeRobots(size, numRobots):
     
