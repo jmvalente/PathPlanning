@@ -22,10 +22,20 @@ def expJSON(robotList, obstacleList, size, writeFile=True):
     return output
 
 def importJSON(fp):
+    """Read in a JSON file.
+    
+    Arguments:
+    fp -- The file being imported
+    
+    Return a list containing a dictionary, a list, and two integers:
+    robotDict -- Dictionary containing the ID, start, goal, color, and path of each robot.
+    obstList -- List containing the coordinates of each obstacle.
+    verticalSize -- Integer identifying the magnitude of the y-axis.
+    horizontalSize -- Integer identifying the magnitude of the x-axis."""
     import json
     rawJSON = json.load(open(fp))
-    robotList = rawJSON["Robots"]
+    robotDict = rawJSON["Robots"]
     obstList = rawJSON["Obstacles"]
     verticalSize = rawJSON["Size"]["Rows"] / 2  # Size includes -n...n
     horizontalSize = rawJSON["Size"]["Cols"] / 2
-    return [robotList, obstList, verticalSize, horizontalSize]
+    return [robotDict, obstList, verticalSize, horizontalSize]

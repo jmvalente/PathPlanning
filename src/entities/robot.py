@@ -20,8 +20,8 @@ class Robot:
         
     def __str__(self):
         #Tell me about your mother.
-        return "ID : {id!s}\nStart: {st!s}\nGoal: {gl!s}\nColor: {cl!s}\n" \
-                .format(id=self.ID, st=self.start, gl=self.goal, cl=self.color)
+        return "ID : {id!s}\nStart: {st!s}\nGoal: {gl!s}\nColor: {cl!s}\nBest Path: {bp}\n" \
+                .format(id=self.ID, st=self.start, gl=self.goal, cl=self.color, bp=self.bestPath)
                 
     def findPaths(self, graph, start, goal, path=[]):
         path = path + [start]
@@ -46,12 +46,24 @@ class Robot:
         return hex(x)
     
     @staticmethod
-    def genWaypoints():
-        height, width = Grid.size
-        start = (randint(1, height) - 1, randint(1, width) - 1)
-        goal = (randint(1, height) - 1, randint(1, width) - 1)
+    def genWaypoints(obstacles):
+        start = Robot.genWaypoint("start", obstacles)
+        goal = Robot.genWaypoint("goal", obstacles)
         return start, goal
     
+    @staticmethod
+    def genWaypoint(kind, obstacles):
+        height, width = Grid.size
+        p = (randint(1, height) - 1, randint(1, width) - 1)
+        if kind == "start":
+            if p in Robot.startNodes or p in obstacles:
+                return Robot.genWaypoint("start")
+            else: return p
+        elif kind == "goal":
+            if p in Robot.goalNodes or p in obstacles:
+                return Robot.genWaypoint("goal")
+            else: return p
+            
     @staticmethod
     def pathToDirection(path):
         directions = ''
@@ -100,13 +112,13 @@ class Robot:
                         break
                     else:
                         if collisionPoint:
-                            logging.warning(Robot.collisionDetails(pair, (robotIndex, pathIndex), collisionPoint))
+#                            logging.warning(Robot.collisionDetails(pair, (robotIndex, pathIndex), collisionPoint))
                             Robot.addWait(robotList[robotIndex], pathIndex, collisionPoint)
                             pathIndex += 1 
                             badPath = True
                             break
                 if not badPath:
-                    logging.info("No collision, adding Robot {0}, Path {1} to set".format(robotIndex, pathIndex))
+#                    logging.info("No collision, adding Robot {0}, Path {1} to set".format(robotIndex, pathIndex))
                     robotPathPairs.add((robotIndex, pathIndex))
                     pathIndex = 0
                     robotIndex += 1

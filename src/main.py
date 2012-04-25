@@ -11,7 +11,7 @@ def main():
     size = (50, 50) #(Rows, Columns)
     obstacles = set()
     Grid.size = size
-    roboArray = makeRobots(size, numRobots)
+    roboArray = makeRobots(size, numRobots, obstacles)
     world = Grid(size, roboArray, obstacles) 
     print world
     for robot in roboArray:
@@ -20,13 +20,12 @@ def main():
     Robot.getBestPath(roboArray)
     for robot in roboArray:
         print robot
-        print robot.bestPath
           
-def makeRobots(size, numRobots):
+def makeRobots(size, numRobots, obstacles):
     
     arr = []
     for i in range(numRobots):
-        start, goal = Robot.genWaypoints()
+        start, goal = Robot.genWaypoints(obstacles)
         arr.append(Robot(start, goal))
     return  arr
 
