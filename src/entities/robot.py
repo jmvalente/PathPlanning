@@ -1,5 +1,6 @@
 from random import randint
 from grid import Grid
+import logging
 #Create the robot objects
 class Robot:
     
@@ -88,25 +89,24 @@ class Robot:
         while robotIndex < len(robotList):
             badPath = False
             while True:
+                badPath = False
                 for pair in robotPathPairs:
                     try:
                         collisionPoint = Robot.getCollisionPoint(robotList[pair[0]].paths[pair[1]],
                                                                  robotList[robotIndex].paths[pathIndex])
                     except IndexError:
-#                        print "Resetting path index"
                         pathIndex = 0
                         badPath = False
                         break
                     else:
                         if collisionPoint:
-                            print Robot.collisionDetails(pair, (robotIndex, pathIndex), collisionPoint)
-                            robotList[robotIndex].paths[pathIndex].insert(collisionPoint, robotList[robotIndex].paths[pathIndex][collisionPoint - 1])
-                            #Robot.addWait(robotList[robotIndex], pathIndex, collisionPoint)
+                            logging.warning(Robot.collisionDetails(pair, (robotIndex, pathIndex), collisionPoint))
+                            Robot.addWait(robotList[robotIndex], pathIndex, collisionPoint)
                             pathIndex += 1 
                             badPath = True
                             break
                 if not badPath:
-#                    print "No collision, adding Robot {0}, Path {1} to set".format(robotIndex, pathIndex)
+                    logging.info("No collision, adding Robot {0}, Path {1} to set".format(robotIndex, pathIndex))
                     robotPathPairs.add((robotIndex, pathIndex))
                     pathIndex = 0
                     robotIndex += 1

@@ -5,11 +5,10 @@
 from entities.grid import Grid
 from entities.robot import Robot
 
-
 def main():
     
     numRobots = 10
-    size = (15, 15) #(Rows, Columns)
+    size = (50, 50) #(Rows, Columns)
     obstacles = set()
     Grid.size = size
     roboArray = makeRobots(size, numRobots)
@@ -18,7 +17,6 @@ def main():
     for robot in roboArray:
         robot.graph = world.buildGraph(robot)
         robot.paths = robot.findPaths(robot.graph, robot.start, robot.goal)
-#        print world.printGrid(robot)
     Robot.getBestPath(roboArray)
     for robot in roboArray:
         print robot
