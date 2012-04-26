@@ -11,7 +11,7 @@ def main():
     
     numRobots = 10
     size = (50, 50) #(Rows, Columns)
-    obstacles = set([(3,3), (25,25), (20,40)])
+    obstacles = set([(3, 3), (25, 25), (20, 40)])
     Grid.size = size
     roboArray = makeRobots(size, numRobots, obstacles)
     world = Grid(size, roboArray, obstacles) 

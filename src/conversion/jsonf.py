@@ -41,8 +41,13 @@ def importJSON(fp):
     horizontalSize -- Integer identifying the magnitude of the x-axis."""
     import json
     rawJSON = json.load(open(fp))
+    #For these next few lines we need to convert the strings back into tuples
     robotDict = rawJSON["Robots"]
-    obstList = rawJSON["Obstacles"]
+    for robot in robotDict:
+        robotDict[robot]['start'] = eval(robotDict[robot]['start'])
+        robotDict[robot]['goal'] = eval(robotDict[robot]['goal'])
+    obstList = [eval(obs) for obs in rawJSON["Obstacles"]]
+    
     verticalSize = rawJSON["Size"]["Rows"] / 2  # Size includes -n...n
     horizontalSize = rawJSON["Size"]["Columns"] / 2
     return [robotDict, obstList, verticalSize, horizontalSize]
