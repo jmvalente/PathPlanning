@@ -112,13 +112,13 @@ class Robot:
                         break
                     else:
                         if collisionPoint:
-#                            logging.warning(Robot.collisionDetails(pair, (robotIndex, pathIndex), collisionPoint))
+                            logging.warning(Robot.collisionDetails(pair, (robotIndex, pathIndex), collisionPoint))
                             Robot.addWait(robotList[robotIndex], pathIndex, collisionPoint)
                             pathIndex += 1 
                             badPath = True
                             break
                 if not badPath:
-#                    logging.info("No collision, adding Robot {0}, Path {1} to set".format(robotIndex, pathIndex))
+                    logging.info("No collision, adding Robot {0}, Path {1} to set".format(robotIndex, pathIndex))
                     robotPathPairs.add((robotIndex, pathIndex))
                     pathIndex = 0
                     robotIndex += 1

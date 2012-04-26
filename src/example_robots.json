@@ -1,24 +1,73 @@
 {
-	"Size": {
-		"Rows" : 50,
-		"Cols" : 50
-		},
-	"Robots": {
-		"R_0": {
-			"start": "(1,1)",
-			"goal": "(10,0)",
-			"path" : "EEEEEEEEE",
-			"color": "0xF0F0F0"
-			},
-		"R_1": {
-			"start": "(5,10)",
-			"goal": "(10,15)",
-			"path" : "NNNNNEEEEE",
-			"color": "0xFFFFFF"
-			}
-		},
-	"Obstacles" : [
-			"(0,1)",
-			"(0,0)"
-			]
-	}
+    "Obstacles": [
+        "(15, -5)", 
+        "(-22, -22)", 
+        "(0, 0)"
+    ], 
+    "Robots": {
+        "R_0": {
+            "color": "0x84f10d", 
+            "goal": "(20, -18)", 
+            "path": "EENNENNEEENNENNEEENNENNEEENNENNEEENNENNEEENNENNEEENEE", 
+            "start": "(-8, 7)"
+        }, 
+        "R_1": {
+            "color": "0xc60afb", 
+            "goal": "(0, -23)", 
+            "path": "NNWWWNNNWNWWWNNNWNWWWNNNWNWWWNNNWNWWWNNNWNWWWNNNN", 
+            "start": "(23, 3)"
+        }, 
+        "R_2": {
+            "color": "0x39035", 
+            "goal": "(-19, -15)", 
+            "path": "WWNNNWNWWWNNNWNWWWNNNWNWWWNNNWNWWWNNNWNWWWNNNWNWWNNNNNNNN", 
+            "start": "(6, 17)"
+        }, 
+        "R_3": {
+            "color": "0x906628", 
+            "goal": "(16, -24)", 
+            "path": "NNEENNENNEEENNENNEEENNENEEEEEEEEE", 
+            "start": "(-4, -11)"
+        }, 
+        "R_4": {
+            "color": "0x67040b", 
+            "goal": "(2, -7)", 
+            "path": "ENEEENNENNEEENNENNEEENEEEEEE", 
+            "start": "(-16, 3)"
+        }, 
+        "R_5": {
+            "color": "0x658c6a", 
+            "goal": "(17, -2)", 
+            "path": "ESSESESEESSESESSSSSSSSSS", 
+            "start": "(10, -19)"
+        }, 
+        "R_6": {
+            "color": "0xa6bf91", 
+            "goal": "(3, 12)", 
+            "path": "ENNENNEENNNNNN", 
+            "start": "(-1, 22)"
+        }, 
+        "R_7": {
+            "color": "0x4ff9b6", 
+            "goal": "(20, 20)", 
+            "path": "SESESSEESESESSESSSSSSSSSSSSS", 
+            "start": "(13, -1)"
+        }, 
+        "R_8": {
+            "color": "0x2a0718", 
+            "goal": "(-16, -22)", 
+            "path": "WNNWWNWWWNNNWNWWWNNNWNWWWNNNNNNNNNNNNNNNNNNN", 
+            "start": "(-2, 8)"
+        }, 
+        "R_9": {
+            "color": "0x883b2d", 
+            "goal": "(8, -2)", 
+            "path": "NNEENEEEEEEEEEEEEEE", 
+            "start": "(-8, 1)"
+        }
+    }, 
+    "Size": {
+        "Columns": 50, 
+        "Rows": 50
+    }
+}
