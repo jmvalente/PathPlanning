@@ -6,64 +6,64 @@
     ], 
     "Robots": {
         "R_0": {
-            "color": "0xbdff38", 
-            "goal": "(16, 7, 0)", 
-            "path": "ENNENNEEENNENNEEENNENNEEEEEEEEEEEEEEEEE", 
-            "start": "(-11, 19, 0)"
+            "color": "(253, 239, 67)", 
+            "goal": "(7, 19, 0)", 
+            "path": "ESSSEESEESSSEESSEESSEESEESSESESS", 
+            "start": "(-8, 2, 0)"
         }, 
         "R_1": {
-            "color": "0x4f855d", 
-            "goal": "(5, -21, 0)", 
-            "path": "NNENEEEEEEEEEEEEEEEEEEEE", 
-            "start": "(-16, -18, 0)"
+            "color": "(235, 156, 188)", 
+            "goal": "(-25, -2, 0)", 
+            "path": "WSWWWWSWWWWWWWWWWWWWWWWWWWWWWWW", 
+            "start": "(4, -4, 0)"
         }, 
         "R_2": {
-            "color": "0x6cb950", 
-            "goal": "(21, 13, 0)", 
-            "path": "EEESSSSSESSESESESSSSSSSSSSSSSSSSSSSSSSSSSSSSS", 
-            "start": "(14, -25, 0)"
+            "color": "(9, 253, 15)", 
+            "goal": "(7, -2, 0)", 
+            "path": "NNENNEEENNENNEEENEEEEEEEEEEEEE", 
+            "start": "(-14, 7, 0)"
         }, 
         "R_3": {
-            "color": "0x6618fc", 
-            "goal": "(-15, -7, 0)", 
-            "path": "WWNWWNNWNWNWWNNWNWNWWNNWW", 
-            "start": "(-1, 4, 0)"
+            "color": "(86, 147, 67)", 
+            "goal": "(-15, -5, 0)", 
+            "path": "WSWWWWSSSSWSSSWSSWWWSWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", 
+            "start": "(24, -16, 0)"
         }, 
         "R_4": {
-            "color": "0xb173ab", 
-            "goal": "(12, -7, 0)", 
-            "path": "EEENNENNEEENNENNEEENNENNEEENNEEEEEEEEEEEEEE", 
-            "start": "(-17, 7, 0)"
+            "color": "(128, 108, 232)", 
+            "goal": "(-16, -10, 0)", 
+            "path": "WNWWNNWNWNWNNNNNNNNN", 
+            "start": "(-10, 4, 0)"
         }, 
         "R_5": {
-            "color": "0x4f68f9", 
-            "goal": "(3, 9, 0)", 
-            "path": "SESEESSESESESSSSESSESEESESSEEESSESESEESSSEESSSS", 
-            "start": "(-17, -18, 0)"
+            "color": "(42, 255, 201)", 
+            "goal": "(15, 23, 0)", 
+            "path": "SSEEEEEEEEEEEEEEEE", 
+            "start": "(-1, 21, 0)"
         }, 
         "R_6": {
-            "color": "0xa2a5cc", 
-            "goal": "(23, -25, 0)", 
-            "path": "ENENNEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE", 
-            "start": "(-19, -22, 0)"
+            "color": "(10, 137, 134)", 
+            "goal": "(-23, -21, 0)", 
+            "path": "NNWNWNWWNNWNWNWWNNWNWNWWNNWNWNWWNNWNWNWWNNWNWNWWWW", 
+            "start": "(3, 3, 0)"
         }, 
         "R_7": {
-            "color": "0xa3139f", 
-            "goal": "(11, 7, 0)", 
-            "path": "EESEESSESSEEESSSEESSESESEESSEESSEESSSSSSSSSS", 
-            "start": "(-7, -19, 0)"
+            "color": "(251, 115, 161)", 
+            "goal": "(21, 10, 0)", 
+            "path": "SSSESESEESSESESSEESSEESSEESSEESEEEEEE", 
+            "start": "(1, -7, 0)"
         }, 
         "R_8": {
-            "color": "0x149392", 
-            "goal": "(23, 23, 0)", 
-            "path": "SESEESSSEESEESSSEESEESSSEESSEESSEESEESSESESSEESSEESEESEEEEEEEEEE", 
-            "start": "(-14, -4, 0)"
+            "color": "(247, 253, 48)", 
+            "goal": "(-1, 24, 0)", 
+            "path": "SSEESEESSESSESEESESSEEESSESESSSSSSSSSSSSSSSSSSSSSSS", 
+            "start": "(-15, -13, 0)"
         }, 
         "R_9": {
-            "color": "0xa6fd12", 
-            "goal": "(-15, 12, 0)", 
-            "path": "EESESESSSSSSSS", 
-            "start": "(-19, 2, 0)"
+            "color": "(114, 235, 88)", 
+            "goal": "(-24, -3, 0)", 
+            "path": "SSWSSSSWSSSWSWWWWWWWWWWWWW", 
+            "start": "(-8, -13, 0)"
         }
     }, 
     "Size": {

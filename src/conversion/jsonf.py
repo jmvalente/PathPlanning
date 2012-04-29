@@ -46,6 +46,7 @@ def importJSON(fp):
     for robot in robotDict:
         robotDict[robot]['start'] = eval(robotDict[robot]['start'])
         robotDict[robot]['goal'] = eval(robotDict[robot]['goal'])
+        robotDict[robot]['color'] = eval(robotDict[robot]['color'])
     obstList = [eval(obs) for obs in rawJSON["Obstacles"]]
     
     verticalSize = rawJSON["Size"]["Rows"] / 2  # Size includes -n...n

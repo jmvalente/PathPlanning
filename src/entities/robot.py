@@ -42,8 +42,10 @@ class Robot:
             
     @staticmethod
     def genColor():
-        x = randint(0, 16777215)
-        return hex(x)
+        r = randint(0,255)
+        g = randint(0,255)
+        b = randint(0,255)
+        return str((r, g, b))
     
     @staticmethod
     def genWaypoints(obstacles):
