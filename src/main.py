@@ -25,7 +25,7 @@ def main():
         
     #Save the output as a JSON file in the format 'robots_%EPOCHTIME%.json
     saveTo = "robots_{0}.json".format((int(time())))
-    expJSON(roboArray, obstacles, size, True, 'example_robots.json')
+    expJSON(roboArray, obstacles, size, True, saveTo)
     
 def makeRobots(size, numRobots, obstacles):
     
