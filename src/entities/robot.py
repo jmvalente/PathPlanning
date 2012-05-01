@@ -59,11 +59,11 @@ class Robot:
         p = (randint(1, height) - 1, randint(1, width) - 1)
         if kind == "start":
             if p in Robot.startNodes or p in obstacles:
-                return Robot.genWaypoint("start")
+                return Robot.genWaypoint("start", obstacles)
             else: return p
         elif kind == "goal":
             if p in Robot.goalNodes or p in obstacles:
-                return Robot.genWaypoint("goal")
+                return Robot.genWaypoint("goal", obstacles)
             else: return p
             
     @staticmethod
