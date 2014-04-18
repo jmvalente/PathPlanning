@@ -42,9 +42,9 @@ class Robot:
             
     @staticmethod
     def genColor():
-        r = randint(0,255)
-        g = randint(0,255)
-        b = randint(0,255)
+        r = randint(0, 255)
+        g = randint(0, 255)
+        b = randint(0, 255)
         return str((r, g, b))
     
     @staticmethod
@@ -84,16 +84,27 @@ class Robot:
         return directions
     
     @staticmethod
-    def getCollisionPoint(pathA, pathB):
-        if len(pathA) > len(pathB):
-            for iNode in range(len(pathB)):
-                if pathA[iNode] == pathB[iNode]:
-                    return iNode
-        else:
-            for iNode in range(len(pathA)):
-                if pathA[iNode] == pathB[iNode]:
-                    return iNode
-        return False #If there are no collisions, return False to let us know things are OK.
+    def getCollisionPoint(pathA, pathB, kind=1):
+        if kind == 1:
+            if len(pathA) > len(pathB):
+                for iNode in range(len(pathB)):
+                    if pathA[iNode] == pathB[iNode]:
+                        return iNode
+                    else:
+                        for iNode in range(len(pathA)):
+                            if pathA[iNode] == pathB[iNode]:
+                                return iNode
+            return False #If there are no collisions, return False to let us know things are OK.
+        if kind == 2:
+            if len(pathA) > len(pathB):
+                for iNode in range(len(pathB) - 1):
+                    if pathA[iNode] == pathB[iNode + 1] and pathA[iNode + 1] == pathB[iNode]:
+                        return iNode + 1
+            else:
+                for iNode in range(len(pathA) - 1):
+                    if pathA[iNode] == pathB[iNode + 1] and pathA[iNode + 1] == pathB[iNode]:
+                        return iNode + 1
+            return False
     
     @staticmethod
     def getBestPath(robotList):
@@ -143,3 +154,20 @@ class Robot:
     def addWait(robot, path, index):
         value = robot.paths[path][index - 1]
         robot.paths[path].insert(index, value)
+        
+    @staticmethod
+    
+    ###Walk Around function that will probably never be implemented
+    def addWalkAround(robot, path, index):
+        value = robot.paths[path][index - 1]
+        prev = robot.paths[path][index - 2]
+        direction = Robot.pathToDirection([prev, value])
+        if direction == "N" or direction == "S":
+            #Add east or west wait
+            pass
+        elif direction == "E" or direction == "W":
+            #Add North or South wait
+            pass
+        elif direction == "H":
+            #Try to move one direction
+            pass

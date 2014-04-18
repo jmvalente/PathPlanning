@@ -1,81 +1,81 @@
 {
     "Obstacles": [
-        "(11, 20, 0)", 
-        "(-16, 6, 0)", 
-        "(24, 1, 0)", 
-        "(4, -23, 0)", 
-        "(14, 18, 0)", 
-        "(-12, -21, 0)", 
-        "(-25, -18, 0)", 
-        "(19, -11, 0)", 
-        "(15, 20, 0)", 
-        "(-10, 23, 0)", 
-        "(-12, -24, 0)", 
-        "(4, 15, 0)", 
-        "(-20, -9, 0)", 
-        "(-10, 17, 0)", 
-        "(-1, 19, 0)"
+        "(9, 24, 0)", 
+        "(9, 13, 0)", 
+        "(20, 12, 0)", 
+        "(-23, -19, 0)", 
+        "(4, 9, 0)", 
+        "(-13, -17, 0)", 
+        "(-20, 12, 0)", 
+        "(15, -1, 0)", 
+        "(-18, 12, 0)", 
+        "(-22, -11, 0)", 
+        "(17, 23, 0)", 
+        "(16, 11, 0)", 
+        "(-5, 17, 0)", 
+        "(7, 3, 0)", 
+        "(10, 13, 0)"
     ], 
     "Robots": {
         "R_0": {
-            "color": "(95, 172, 134)", 
-            "goal": "(-24, 13, 0)", 
-            "path": "SWSSSW", 
-            "start": "(-22, 17, 0)"
+            "color": "(63, 215, 86)", 
+            "goal": "(-9, 1, 0)", 
+            "path": "NEEEENNENNEEENNENNEEENNENNEENNNNNNN", 
+            "start": "(-24, -19, 0)"
         }, 
         "R_1": {
-            "color": "(102, 26, 82)", 
-            "goal": "(-3, 1, 0)", 
-            "path": "WNWWWNNNWNWWWNNNWNWWWNNWWWWWWW", 
-            "start": "(16, -10, 0)"
+            "color": "(19, 35, 140)", 
+            "goal": "(-7, 9, 0)", 
+            "path": "WNWWWNNNWNWWWNNNWNWWWNNNWNWWWNNNWNWWWNNNWNWWWNNWWW", 
+            "start": "(20, -14, 0)"
         }, 
         "R_2": {
-            "color": "(30, 226, 187)", 
-            "goal": "(-20, 18, 0)", 
-            "path": "WWSSSSWWWWSWWWWWWWWWWW", 
-            "start": "(-3, 23, 0)"
+            "color": "(122, 232, 118)", 
+            "goal": "(-8, -20, 0)", 
+            "path": "WWWWN", 
+            "start": "(-4, -21, 0)"
         }, 
         "R_3": {
-            "color": "(4, 246, 198)", 
-            "goal": "(20, -21, 0)", 
-            "path": "SESEESSSEESEESSESESSESESESESESESEEE", 
-            "start": "(2, -4, 0)"
+            "color": "(200, 233, 26)", 
+            "goal": "(-21, -9, 0)", 
+            "path": "NWNWWWWWWWWWWWWWWWWWWWW", 
+            "start": "(0, -11, 0)"
         }, 
         "R_4": {
-            "color": "(150, 151, 106)", 
-            "goal": "(20, -4, 0)", 
-            "path": "ENNEEEEEEEEEEEEEEEEEEEE", 
-            "start": "(-1, -6, 0)"
+            "color": "(192, 5, 140)", 
+            "goal": "(24, -2, 0)", 
+            "path": "EEESSEEESSSEESSSEESEESSEESSEESSEESESSEEEEEEEEEE", 
+            "start": "(-5, 16, 0)"
         }, 
         "R_5": {
-            "color": "(24, 191, 71)", 
-            "goal": "(-10, -12, 0)", 
-            "path": "NENEEE", 
-            "start": "(-14, -14, 0)"
+            "color": "(246, 110, 126)", 
+            "goal": "(10, -19, 0)", 
+            "path": "SESSESSESESESESESESEESESEESSESESEESSESESEESSESSEEESEEEEEEEEE", 
+            "start": "(-24, 7, 0)"
         }, 
         "R_6": {
-            "color": "(48, 132, 37)", 
-            "goal": "(-9, 12, 0)", 
-            "path": "NNNNWNWWWNNNWNNNNNN", 
-            "start": "(-4, -2, 0)"
+            "color": "(65, 161, 0)", 
+            "goal": "(11, 3, 0)", 
+            "path": "ENNENNEEEEEEEEEEEEEEEEEEENEEE", 
+            "start": "(-13, -2, 0)"
         }, 
         "R_7": {
-            "color": "(183, 177, 133)", 
-            "goal": "(-24, -17, 0)", 
-            "path": "WSSSSSSSSSSSS", 
-            "start": "(-23, -5, 0)"
+            "color": "(241, 216, 176)", 
+            "goal": "(-14, 9, 0)", 
+            "path": "WWWNNNWNWWWNNNWNWWWNNNWNWWWNNNWNWWWNNNWNWNNNNNN", 
+            "start": "(7, -17, 0)"
         }, 
         "R_8": {
-            "color": "(57, 202, 172)", 
-            "goal": "(-24, -5, 0)", 
-            "path": "WWWSSSSWWWWSSHSSWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", 
-            "start": "(18, 3, 0)"
+            "color": "(116, 96, 25)", 
+            "goal": "(24, -10, 0)", 
+            "path": "ESSSEESSESESEESSESEESSESEESSEESSESSSSSSSSSSSSSSS", 
+            "start": "(8, 22, 0)"
         }, 
         "R_9": {
-            "color": "(86, 175, 111)", 
-            "goal": "(7, 16, 0)", 
-            "path": "NNNEEENNENNEEENNENNNNNNNNN", 
-            "start": "(-1, -2, 0)"
+            "color": "(173, 244, 230)", 
+            "goal": "(8, 11, 0)", 
+            "path": "ENEEEEEE", 
+            "start": "(1, 10, 0)"
         }
     }, 
     "Size": {
